@@ -180,8 +180,14 @@ class DropboxAdapter implements Flysystem\FilesystemAdapter
      */
     public function visibility(string $path): FileAttributes
     {
-        // Noop
-        return new FileAttributes($path);
+        // Adds string for visibility config.  Flysystem (3.07) rejects null visibility.
+        return new FileAttributes(
+            $path,
+            null,
+            'noPredefinedVisibility',
+            null,
+            null,
+        );
     }
 
     /**
